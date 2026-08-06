@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro'
+import Editor from '../components/Editor.tsx'
+---
+
+<Base>
+  <section class="dg-hero">
+    <span class="dg-node-badge">diagram-as-code</span>
+    <h1 class="dg-hero-title">
+      Draw with <span class="dg-hero-accent">text.</span> Ship <span class="dg-hero-accent">SVG &amp; PNG.</span>
+    </h1>
+    <p class="dg-hero-sub">
+      A blueprint-grade Mermaid studio. Type the graph, watch it render live, export clean vectors or crisp raster —
+      all in your browser. No upload. No signup. Optional AI turns plain English into diagrams.
+    </p>
+    <ul class="dg-hero-feats">
+      <li><span aria-hidden>◇</span> Live Mermaid editor</li>
+      <li><span aria-hidden>◇</span> Flowchart · Sequence · ER · Gantt · Class</li>
+      <li><span aria-hidden>◇</span> Export SVG / PNG</li>
+      <li><span aria-hidden>◇</span> AI: describe → diagram</li>
+    </ul>
+  </section>
+
+  <Editor client:load />
+
+  <section class="dg-notes">
+    <div class="dg-panel dg-note">
+      <span class="dg-node-badge">private</span>
+      <h2>Nothing leaves your machine</h2>
+      <p>Rendering, validation, and export all run client-side. Your diagram source is never uploaded — the tool works offline once loaded.</p>
+    </div>
+    <div class="dg-panel dg-note">
+      <span class="dg-node-badge">fast</span>
+      <h2>Instant first paint</h2>
+      <p>The heavy renderer loads only when you first render — first paint stays instant. AI is optional; if a provider is down, the editor keeps working.</p>
+    </div>
+    <div class="dg-panel dg-note">
+      <span class="dg-node-badge">portable</span>
+      <h2>Text is the source of truth</h2>
+      <p>Diagrams are plain Mermaid. Paste into docs, commit to git, drop a <code>.mmd</code> file here — version it like code.</p>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <a href="https://mermaid.js.org/" rel="noopener">Mermaid</a>
+    <a href="https://github.com/chirag127/oriz-diagram" rel="noopener">Source</a>
+  </Fragment>
+</Base>
+
+<style>
+  .dg-hero { padding-block: var(--oz-space-12) var(--oz-space-6); max-width: 60ch; }
+  .dg-hero-title {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    letter-spacing: -0.03em;
+    margin-block: var(--oz-space-4) var(--oz-space-3);
+  }
+  .dg-hero-accent { color: var(--oz-accent); }
+  .dg-hero-sub { color: var(--oz-muted); font-size: 1.05rem; max-width: 54ch; }
+  .dg-hero-feats {
+    list-style: none;
+    padding: 0;
+    margin: var(--oz-space-4) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--oz-space-2) var(--oz-space-4);
+    font-family: var(--oz-font-mono);
+    font-size: 0.85rem;
+    color: var(--oz-fg);
+  }
+  .dg-hero-feats li { display: inline-flex; gap: 0.4rem; align-items: center; }
+  .dg-hero-feats span { color: var(--oz-accent); }
+
+  .dg-notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--oz-space-4);
+    margin-block: var(--oz-space-8) var(--oz-space-12);
+  }
+  .dg-note { padding: var(--oz-space-6); }
+  .dg-note h2 { font-size: 1.1rem; margin-block: var(--oz-space-3) var(--oz-space-2); }
+  .dg-note p { color: var(--oz-muted); margin: 0; font-size: 0.92rem; }
+  .dg-note code { font-family: var(--oz-font-mono); background: var(--dg-panel-2); padding: 0.1em 0.35em; border-radius: var(--oz-radius-s); }
+</style>

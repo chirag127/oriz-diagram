@@ -1,0 +1,160 @@
+/* oriz-diagram — bespoke theme: "Blueprint / node-graph"
+   Overrides the shared --oz-* contract. Slate + electric-blue, technical.
+   MUST differ from oriz-dev terminal look: lighter slate blueprint, structured panels. */
+
+@import '@chirag127/oz-tokens-base';
+@import '@chirag127/oz-chrome/styles.css';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import 'tailwindcss';
+
+:root {
+  /* --- bespoke palette (light blueprint) --- */
+  --oz-bg: #eef2f8;
+  --oz-fg: #1a2740;
+  --oz-surface: #ffffff;
+  --oz-muted: #5b6a86;
+  --oz-border: #c7d3e6;
+  --oz-accent: #1f6bff;           /* electric blue */
+  --oz-accent-fg: #ffffff;
+
+  /* extra site tokens */
+  --dg-panel: #f7faff;
+  --dg-panel-2: #eaf0fb;
+  --dg-node: #2a5bd7;
+  --dg-edge: #93a8cf;
+  --dg-grid: rgba(31, 107, 255, 0.10);
+  --dg-dot: rgba(31, 107, 255, 0.22);
+  --dg-code-bg: #0f1a2e;
+  --dg-code-fg: #c7d6f5;
+  --dg-glow: 0 0 0 1px rgba(31, 107, 255, 0.25), 0 8px 30px rgba(15, 26, 46, 0.10);
+
+  /* --- type pairing --- */
+  --oz-font-display: 'Inter Variable', system-ui, sans-serif;
+  --oz-font-body: 'Inter Variable', system-ui, sans-serif;
+  --oz-font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+
+  /* chrome vars used by oz-chrome styles */
+  --oz-paper: var(--oz-surface);
+  --oz-ink: var(--oz-fg);
+  --oz-rule: var(--oz-border);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --oz-bg: #0b1220;
+    --oz-fg: #dce6fb;
+    --oz-surface: #111c31;
+    --oz-muted: #8ea1c4;
+    --oz-border: #223354;
+    --oz-accent: #4d8bff;
+    --oz-accent-fg: #08101f;
+
+    --dg-panel: #0e1728;
+    --dg-panel-2: #13223c;
+    --dg-node: #5a91ff;
+    --dg-edge: #34507f;
+    --dg-grid: rgba(77, 139, 255, 0.10);
+    --dg-dot: rgba(77, 139, 255, 0.26);
+    --dg-code-bg: #060c17;
+    --dg-code-fg: #b9cbf0;
+    --dg-glow: 0 0 0 1px rgba(77, 139, 255, 0.30), 0 8px 30px rgba(0, 0, 0, 0.45);
+
+    --oz-paper: var(--oz-surface);
+    --oz-ink: var(--oz-fg);
+    --oz-rule: var(--oz-border);
+  }
+}
+
+/* signature node-and-edge dotted background */
+body {
+  background-color: var(--oz-bg);
+  background-image:
+    radial-gradient(var(--dg-dot) 1px, transparent 1px),
+    linear-gradient(var(--dg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--dg-grid) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 28px 28px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+.dg-container {
+  width: min(100% - 2rem, 1440px);
+  margin-inline: auto;
+}
+
+/* panels with connector-line accents */
+.dg-panel {
+  position: relative;
+  background: var(--dg-panel);
+  border: 1px solid var(--oz-border);
+  border-radius: var(--oz-radius-l);
+  box-shadow: var(--dg-glow);
+}
+.dg-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  border-radius: var(--oz-radius-l) 0 0 var(--oz-radius-l);
+  background: linear-gradient(180deg, var(--oz-accent), transparent 70%);
+}
+
+.dg-node-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.15rem 0.6rem;
+  font-family: var(--oz-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--oz-accent);
+  background: color-mix(in oklab, var(--oz-accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--oz-accent) 35%, transparent);
+  border-radius: var(--oz-radius-full);
+}
+.dg-node-badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--oz-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--oz-accent) 22%, transparent);
+}
+
+.dg-btn {
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--oz-radius-m);
+  border: 1px solid var(--oz-border);
+  background: var(--oz-surface);
+  color: var(--oz-fg);
+  transition: border-color var(--oz-dur-fast) var(--oz-ease-out),
+    transform var(--oz-dur-fast) var(--oz-ease-out),
+    background var(--oz-dur-fast) var(--oz-ease-out);
+}
+.dg-btn:hover { border-color: var(--oz-accent); transform: translateY(-1px); }
+.dg-btn:active { transform: translateY(0); }
+.dg-btn--primary {
+  background: var(--oz-accent);
+  color: var(--oz-accent-fg);
+  border-color: var(--oz-accent);
+}
+.dg-btn--primary:hover { filter: brightness(1.06); }
+.dg-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.dg-code {
+  font-family: var(--oz-font-mono);
+  background: var(--dg-code-bg);
+  color: var(--dg-code-fg);
+  border-radius: var(--oz-radius-m);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
