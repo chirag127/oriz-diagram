@@ -25,6 +25,12 @@ const {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://diagram.oriz.in" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#1f6bff" />
+    <script>
+      import { registerSW } from 'virtual:pwa-register'
+      registerSW({ immediate: true })
+    </script>
   </head>
   <body>
     <OzToolShell site="diagram" title="Diagram-as-code" mainClass="dg-container">
