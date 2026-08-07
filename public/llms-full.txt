@@ -1,0 +1,110 @@
+# oriz-diagram — full site content
+
+> Free online Mermaid diagram editor. Diagram-as-code in your browser: write flowcharts, sequence, ER, Gantt, and class diagrams as text, render them live, and export clean SVG or PNG. 100% client-side, no upload, no signup, free.
+
+Live app: https://diagram.oriz.in
+Source: https://github.com/chirag127/oriz-diagram
+License: MIT
+
+## Hero
+
+Free online Mermaid diagram editor. Write flowcharts, sequence, ER, Gantt and class diagrams as text — render live, export clean SVG or PNG. 100% in your browser. No upload. No signup.
+
+Primary action: open the editor. Supported diagram types: flowchart, sequence, ER, Gantt, class, plus optional AI.
+
+## What it is
+
+oriz-diagram is a diagram-as-code studio — a live Mermaid editor. You type a diagram in text and watch it render instantly in a split code/preview layout. Export the result as SVG (vector) or PNG (2x raster). It ships one-click templates for the common diagram types, and an optional AI helper that converts plain English into Mermaid or fixes broken syntax.
+
+Everything runs in the browser. Rendering, validation, and export are all client-side; your diagram source never leaves your machine. It works offline once loaded.
+
+## Features
+
+- Live Mermaid editor: split code / preview panes; renders as you type (debounced); zoom controls on the preview.
+- Templates: flowchart, sequence, ER, Gantt, and class — one click each to load a working starting diagram.
+- Export: SVG (clean vector) and PNG (2x raster generated from the SVG via canvas).
+- Drag-drop: drop a .mmd or .txt file onto the preview to load its contents.
+- Optional AI: describe a process in plain English and get Mermaid code back; or run "fix syntax" on a parse error. Powered by @chirag127/oz-ai (g4f multi-provider failover, no API key). If AI is down, the editor still works.
+- Persistence: your last diagram is remembered in localStorage.
+- Instant first paint: the heavy Mermaid renderer is lazy-loaded on first render only.
+
+## Diagram templates
+
+Flowchart:
+
+```
+flowchart TD
+    A([Start]) --> B{Input valid?}
+    B -- Yes --> C[Process data]
+    B -- No --> D[Show error]
+    C --> E[(Save result)]
+    D --> F([End])
+    E --> F
+```
+
+Sequence:
+
+```
+sequenceDiagram
+    participant U as User
+    participant A as App
+    participant S as Server
+    U->>A: Click export
+    A->>S: POST /render
+    S-->>A: 200 SVG
+    A-->>U: Download file
+```
+
+ER diagram:
+
+```
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE_ITEM : contains
+    PRODUCT ||--o{ LINE_ITEM : "listed in"
+```
+
+Gantt:
+
+```
+gantt
+    title Project timeline
+    dateFormat YYYY-MM-DD
+    section Design
+    Research   :done,    r1, 2026-01-01, 5d
+    Wireframes :active,  w1, after r1, 4d
+```
+
+Class:
+
+```
+classDiagram
+    class Shape { +String id +area() float }
+    class Circle { +float radius +area() float }
+    Shape <|-- Circle
+```
+
+## How to use
+
+1. Open the editor at https://diagram.oriz.in.
+2. Pick a template (flowchart, sequence, ER, Gantt, class) or start typing Mermaid text.
+3. Watch the preview render live as you type.
+4. Optionally click the AI button to turn English into Mermaid, or fix a syntax error.
+5. Export as SVG or PNG, or drop a .mmd/.txt file to load an existing diagram.
+
+## Privacy
+
+No backend, no API keys, no analytics on your diagrams. Everything is computed locally. AI calls happen only when you click an AI button, and go to g4f providers via the shared client; your other diagrams never touch a network.
+
+## FAQ
+
+Is it free? Yes, completely free, no signup.
+Do I need an account? No. There is no login and no upload.
+Where is my diagram stored? Only in your browser (localStorage). Nothing is uploaded.
+Does the AI need a key? No. AI uses g4f multi-provider failover with no key; the editor works even when AI is unavailable.
+What can I export? SVG (vector) and PNG (2x raster).
+Which diagram types are supported? Everything Mermaid supports, with templates for flowchart, sequence, ER, Gantt, and class.
+
+## Tech
+
+Client-only Astro static build, React 19 islands, Tailwind v4, the mermaid library, and shared @chirag127/oz-* packages (oz-ai for AI, oz-file for file handling, oz-tokens-base for tokens, oz-chrome for shell). PWA-installable. Deployed on Cloudflare Pages.

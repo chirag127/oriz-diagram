@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About oriz-diagram — diagram-as-code Mermaid editor</title>
+  <meta name="description" content="About oriz-diagram: a client-only, no-signup Mermaid live editor that exports SVG/PNG. What it is, its features, and its tech." />
+  <link rel="canonical" href="https://chirag127.github.io/oriz-diagram/" />
+  <style>
+    :root {
+      --ink: #16202b;
+      --muted: #5a6b7b;
+      --line: #dde5ec;
+      --accent: #0b7a75;
+      --bg: #f5f7f8;
+      --card: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    .tag {
+      display: inline-block;
+      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      background: var(--card);
+    }
+    h1 { font-size: 2rem; margin: 1rem 0 0.4rem; letter-spacing: -0.02em; }
+    .lede { color: var(--muted); font-size: 1.05rem; margin: 0 0 1.5rem; }
+    .note {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--accent);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0 0 2rem;
+    }
+    h2 { font-size: 1.15rem; margin: 2rem 0 0.5rem; }
+    ul { margin: 0.25rem 0 0; padding-left: 1.15rem; }
+    li { margin: 0.3rem 0; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0 0; }
+    .links a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 0.5rem;
+      padding: 0.55rem 0.9rem;
+    }
+    .links a.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; background: #eef2f4; padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.85em; }
+    footer { margin-top: 3rem; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 1rem; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="tag">about this project</span>
+    <h1>oriz-diagram</h1>
+    <p class="lede">Diagram-as-code — a Mermaid live editor in your browser that exports SVG or PNG.</p>
+
+    <p class="note">This is the project info page. It is <strong>not</strong> the app. Open the live tool at
+      <a href="https://diagram.oriz.in">diagram.oriz.in</a>.</p>
+
+    <h2>What it is</h2>
+    <p>Type a diagram in Mermaid text, watch it render instantly in a split code/preview layout, and export clean
+      SVG (vector) or PNG (2x raster). Ships one-click templates for flowchart, sequence, ER, Gantt, and class
+      diagrams. An optional AI helper turns plain English into Mermaid or fixes broken syntax.</p>
+
+    <h2>Key features</h2>
+    <ul>
+      <li>Live split code/preview Mermaid editor, renders as you type, with zoom controls.</li>
+      <li>One-click templates: flowchart, sequence, ER, Gantt, class.</li>
+      <li>Export SVG (vector) and PNG (2x raster from the SVG).</li>
+      <li>Drag-drop a <code>.mmd</code> / <code>.txt</code> file to load it.</li>
+      <li>Optional AI: English to Mermaid, or fix-syntax. Editor still works if AI is down.</li>
+      <li>Last diagram remembered in <code>localStorage</code>; heavy renderer lazy-loaded.</li>
+    </ul>
+
+    <h2>Tech</h2>
+    <ul>
+      <li>Client-only Astro static build (React 19 islands, Tailwind v4, the <code>mermaid</code> library).</li>
+      <li>AI via <code>@chirag127/oz-ai</code> — g4f multi-provider failover, no API key.</li>
+      <li>PWA-installable.</li>
+      <li>100% in-browser: no upload, no signup, no backend.</li>
+    </ul>
+
+    <div class="links">
+      <a class="primary" href="https://diagram.oriz.in">Open the live app</a>
+      <a href="https://github.com/chirag127/oriz-diagram">Source on GitHub</a>
+      <a href="https://diagram.oriz.in/llms.txt">llms.txt</a>
+    </div>
+
+    <footer>MIT &copy; 2026 Chirag Singhal &middot; <a href="https://diagram.oriz.in">diagram.oriz.in</a></footer>
+  </main>
+</body>
+</html>
