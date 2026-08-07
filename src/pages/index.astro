@@ -7,37 +7,34 @@ import Editor from '../components/Editor.tsx'
   <section class="dg-hero">
     <span class="dg-node-badge">diagram-as-code</span>
     <h1 class="dg-hero-title">
-      Draw with <span class="dg-hero-accent">text.</span> Ship <span class="dg-hero-accent">SVG &amp; PNG.</span>
+      Free online Mermaid diagram editor
     </h1>
     <p class="dg-hero-sub">
-      A blueprint-grade Mermaid studio. Type the graph, watch it render live, export clean vectors or crisp raster —
-      all in your browser. No upload. No signup. Optional AI turns plain English into diagrams.
+      Write flowcharts, sequence, ER, Gantt &amp; class diagrams as text — render live, export clean
+      SVG or PNG. 100% in your browser. No upload. No signup.
     </p>
-    <ul class="dg-hero-feats">
-      <li><span aria-hidden>◇</span> Live Mermaid editor</li>
-      <li><span aria-hidden>◇</span> Flowchart · Sequence · ER · Gantt · Class</li>
-      <li><span aria-hidden>◇</span> Export SVG / PNG</li>
-      <li><span aria-hidden>◇</span> AI: describe → diagram</li>
-    </ul>
+    <div class="dg-hero-cta">
+      <a class="dg-btn dg-btn--primary" href="#editor">Open the editor</a>
+      <span class="dg-hero-note">Flowchart · Sequence · ER · Gantt · Class · optional AI</span>
+    </div>
   </section>
 
-  <Editor client:load />
+  <div id="editor">
+    <Editor client:load />
+  </div>
 
-  <section class="dg-notes">
-    <div class="dg-panel dg-note">
+  <section class="dg-notes" aria-label="Why oriz-diagram">
+    <div class="dg-note">
       <span class="dg-node-badge">private</span>
-      <h2>Nothing leaves your machine</h2>
-      <p>Rendering, validation, and export all run client-side. Your diagram source is never uploaded — the tool works offline once loaded.</p>
+      <p>Rendering, validation, and export run client-side — your source is never uploaded and works offline once loaded.</p>
     </div>
-    <div class="dg-panel dg-note">
-      <span class="dg-node-badge">fast</span>
-      <h2>Instant first paint</h2>
-      <p>The heavy renderer loads only when you first render — first paint stays instant. AI is optional; if a provider is down, the editor keeps working.</p>
-    </div>
-    <div class="dg-panel dg-note">
+    <div class="dg-note">
       <span class="dg-node-badge">portable</span>
-      <h2>Text is the source of truth</h2>
-      <p>Diagrams are plain Mermaid. Paste into docs, commit to git, drop a <code>.mmd</code> file here — version it like code.</p>
+      <p>Diagrams are plain Mermaid text. Paste into docs, commit to git, drop a <code>.mmd</code> file — version it like code.</p>
+    </div>
+    <div class="dg-note">
+      <span class="dg-node-badge">optional AI</span>
+      <p>Describe a diagram in plain English and get Mermaid back. If a provider is down, the editor keeps working.</p>
     </div>
   </section>
 
@@ -48,27 +45,28 @@ import Editor from '../components/Editor.tsx'
 </Base>
 
 <style>
-  .dg-hero { padding-block: var(--oz-space-12) var(--oz-space-6); max-width: 60ch; }
+  .dg-hero { padding-block: var(--oz-space-12) var(--oz-space-6); max-width: 62ch; }
   .dg-hero-title {
     font-size: clamp(2rem, 6vw, 3.4rem);
     letter-spacing: -0.03em;
     margin-block: var(--oz-space-4) var(--oz-space-3);
   }
-  .dg-hero-accent { color: var(--oz-accent); }
-  .dg-hero-sub { color: var(--oz-muted); font-size: 1.05rem; max-width: 54ch; }
-  .dg-hero-feats {
-    list-style: none;
-    padding: 0;
-    margin: var(--oz-space-4) 0 0;
+  .dg-hero-sub { color: var(--oz-muted); font-size: 1.05rem; max-width: 56ch; margin: 0; }
+  .dg-hero-cta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--oz-space-2) var(--oz-space-4);
-    font-family: var(--oz-font-mono);
-    font-size: 0.85rem;
-    color: var(--oz-fg);
+    align-items: center;
+    gap: var(--oz-space-3) var(--oz-space-4);
+    margin-top: var(--oz-space-5);
   }
-  .dg-hero-feats li { display: inline-flex; gap: 0.4rem; align-items: center; }
-  .dg-hero-feats span { color: var(--oz-accent); }
+  .dg-hero-cta .dg-btn--primary { text-decoration: none; padding: 0.6rem 1.15rem; }
+  .dg-hero-note {
+    font-family: var(--oz-font-mono);
+    font-size: 0.8rem;
+    color: var(--oz-muted);
+  }
+
+  #editor { margin-block: var(--oz-space-6); scroll-margin-top: var(--oz-space-4); }
 
   .dg-notes {
     display: grid;
@@ -76,8 +74,7 @@ import Editor from '../components/Editor.tsx'
     gap: var(--oz-space-4);
     margin-block: var(--oz-space-8) var(--oz-space-12);
   }
-  .dg-note { padding: var(--oz-space-6); }
-  .dg-note h2 { font-size: 1.1rem; margin-block: var(--oz-space-3) var(--oz-space-2); }
-  .dg-note p { color: var(--oz-muted); margin: 0; font-size: 0.92rem; }
+  .dg-note { padding: var(--oz-space-5); }
+  .dg-note p { color: var(--oz-muted); margin: var(--oz-space-2) 0 0; font-size: 0.92rem; }
   .dg-note code { font-family: var(--oz-font-mono); background: var(--dg-panel-2); padding: 0.1em 0.35em; border-radius: var(--oz-radius-s); }
 </style>

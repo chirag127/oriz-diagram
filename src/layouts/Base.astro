@@ -7,10 +7,23 @@ interface Props {
   title?: string
   description?: string
 }
+const SITE_URL = 'https://diagram.oriz.in'
 const {
-  title = 'oriz-diagram — Diagram-as-code',
-  description = 'Diagram-as-code studio. Mermaid live editor, export SVG/PNG, flowchart/sequence/ER/gantt/class templates. 100% client-side — no upload, no signup.',
+  title = 'oriz-diagram — free online Mermaid diagram editor, no signup',
+  description = 'Free online Mermaid diagram maker — write flowcharts, sequence, ER, Gantt & class diagrams as code and export clean SVG/PNG. 100% in your browser, no upload, no signup.',
 } = Astro.props
+const canonical = new URL(Astro.url.pathname, SITE_URL).href
+const ogImage = new URL('/og.png', SITE_URL).href
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'oriz-diagram',
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Web',
+  url: SITE_URL,
+  description,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+}
 ---
 
 <!doctype html>
@@ -20,11 +33,19 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://diagram.oriz.in" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="oriz.in" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link rel="manifest" href="/manifest.webmanifest" />
     <meta name="theme-color" content="#1f6bff" />
     <script>
