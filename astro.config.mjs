@@ -3,7 +3,7 @@ import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
-import AstroPwa from '@vite-pwa/astro'
+import { AstroPWAIntegration } from '@vite-pwa/astro'
 
 export default defineConfig({
   site: 'https://diagram.oriz.in',
@@ -14,9 +14,9 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap(),
-    AstroPwa({
+    AstroPWAIntegration({
       registerType: 'autoUpdate',
-      injectRegister: null,
+      injectRegister: false,
       manifest: {
         id: '/',
         name: 'oriz Diagram',
@@ -59,7 +59,7 @@ export default defineConfig({
           },
         ],
       },
-      workbox: {
+      generateSW: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,json}'],
         navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
