@@ -1,0 +1,29 @@
+name: Validate diagram
+
+on:
+  push:
+    branches: ["dependabot/npm_and_yarn/all-deps-5080ff2d0a"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Test diagram helpers
+        run: npm test
+      - name: Build static site and service worker
+        run: npm run build
+      - name: Verify PWA output
+        run: |
+          node --input-type=module -e 'import fs from "node:fs"; import assert from "node:assert/strict"; for (const file of ["dist/index.html", "dist/sw.js", "dist/manifest.webmanifest"]) assert.ok(fs.statSync(file).size > 0, `Missing or empty ${file}`); const manifest = JSON.parse(fs.readFileSync("dist/manifest.webmanifest", "utf8")); assert.equal(manifest.name, "oriz Diagram"); assert.equal(manifest.start_url, "/");'
